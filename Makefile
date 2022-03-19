@@ -3,18 +3,18 @@
 #
 XCC=g++
 LDFLAGS=-g
-CPPFLAGS=-g
+CPPFLAGS=-g -I./include
 LDLIBS=-lstdc++ -lc -lm
 
 all: ttt
 clean:
 	rm ttt ttt.o support.o
 
-ttt: support.o ttt.o
-	$(XCC) $(LDFLAGS) -o ttt ttt.o support.o $(LDLIBS)
+ttt: target/support.o target/ttt.o
+	$(XCC) $(LDFLAGS) -o ttt target/ttt.o target/support.o $(LDLIBS)
 
-ttt.o: ttt.cpp support.hh
-	$(XCC) $(CPPFLAGS) -c ttt.cpp
+target/ttt.o: src/ttt.cpp include/support.hh
+	$(XCC) $(CPPFLAGS) -c src/ttt.cpp -o target/ttt.o
 
-support.o: support.cpp support.hh
-	$(XCC) $(CPPFLAGS) -c support.cpp
+target/support.o: src/support.cpp include/support.hh
+	$(XCC) $(CPPFLAGS) -c src/support.cpp -o target/support.o
