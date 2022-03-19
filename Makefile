@@ -8,7 +8,7 @@ LDLIBS=-lstdc++ -lc -lm
 
 all: ttt
 clean:
-	rm ttt ttt.o support.o
+	rm ttt target/ttt.o target/support.o
 
 ttt: target/support.o target/ttt.o
 	$(XCC) $(LDFLAGS) -o ttt target/ttt.o target/support.o $(LDLIBS)
