@@ -6,9 +6,10 @@ LDFLAGS=-g
 CPPFLAGS=-g -I./include
 LDLIBS=-lstdc++ -lc -lm
 
-all: ttt
+all: ttt TicTacToe
+
 clean:
-	rm ttt target/ttt.o target/support.o
+	rm ttt TicTacToe target/ttt.o target/support.o target/TicTacToe.o
 
 ttt: target/support.o target/ttt.o
 	$(XCC) $(LDFLAGS) -o ttt target/ttt.o target/support.o $(LDLIBS)
@@ -18,3 +19,9 @@ target/ttt.o: src/ttt.cpp include/support.hh
 
 target/support.o: src/support.cpp include/support.hh
 	$(XCC) $(CPPFLAGS) -c src/support.cpp -o target/support.o
+
+target/TicTacToe.o: src/TicTacToe.cpp include/TicTacToe.hh
+	$(XCC) $(CPPFLAGS) -c src/TicTacToe.cpp -o target/TicTacToe.o
+
+TicTacToe: target/TicTacToe.o
+	$(XCC) $(LDFLAGS) -o TicTacToe target/TicTacToe.o $(LDLIBS)
