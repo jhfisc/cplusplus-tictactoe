@@ -71,12 +71,14 @@ class TicTacToe {
         winner winningPlayer();
         bool is_valid(int row, char col, bool computer=false);
 
-    public:
-        TicTacToe();
         void end_game();
-        void reset();
         void print_board();
         void human_move();
         void computer_move();
         bool continueGame();
+
+    public:
+        TicTacToe();
+        void reset();
+        void play();
 };

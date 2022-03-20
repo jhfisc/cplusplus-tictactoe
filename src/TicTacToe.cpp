@@ -147,20 +147,25 @@ void TicTacToe::computer_move() {
 
 bool TicTacToe::continueGame() {
     bool result = true;
-    TicTacToe::winner w = winningPlayer();
-    std::vector<std::string>toString = {"You", "Computer", "Tie", "NONE!!"};
+    TicTacToe::winner winner = winningPlayer();
 
-    std::cout << "Winner: ";
-    std::cout << toString[w] << "\n";
-
-    if (w == YOU || w == COMPUTER || w == TIE) {
+    if (winner == YOU || winner == COMPUTER || winner == TIE) {
         result = false;
     }
 
-    std::cout << "Result: ";
-    std::cout << result << "\n";
-    
     return result;
+}
+
+void TicTacToe::play() {
+    while (continueGame()) {
+        print_board();
+        human_move();
+        if (continueGame()) {
+            computer_move();
+        }
+        std::cout << "\n";
+    }
+    end_game();
 }
 
 int main() {
@@ -171,15 +176,7 @@ int main() {
     std::cin >> answer;
     while (answer == 'y') {
         game.reset();
-        while (game.continueGame()) {
-            game.print_board();
-            game.human_move();
-            if (game.continueGame()) {
-                game.computer_move();
-            }
-            std::cout << "\n";
-        }
-        game.end_game();
+        game.play();
         std::cout << "Would you like to play another game of Tic-Tac-Toe (y/n)? ";
         std::cin >> answer;
     }
